@@ -1,0 +1,1890 @@
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
+#pragma once
+#include<queue>
+#include<vector>
+template<class W>
+struct HuffmanTreeNode
+{
+	HuffmanTreeNode(const W& weight = W())
+	:_left(nullptr)
+	, _right(nullptr)
+	, _weight(weight)
+	{}
+	HuffmanTreeNode<W>* _left;
+	HuffmanTreeNode<W>* _right;
+	W _weight;
+};
+template<class W>
+class HuffmanTree
+{
+	typedef HuffmanTreeNode<W> Node;
+
+	struct Com
+	{
+		bool operator() (const Node* left, const Node* right)
+		{
+			return left->_weight > right->_weight;
+		}
+	};
+public:
+	HuffmanTree()
+		:_root(nullptr)
+	{}
+	~HuffmanTree()
+	{
+		Destroy(_root);
+	}
+
+	Node* CreatHuffmanTree(const std::vector<W>& weights)
+	{
+		//构造优先级队列创建小堆
+		std::priority_queue <Node*,std::vector<Node*>,Com> q;
+		for (auto e : weights)
+		{
+			if (e._appearCount > 0)
+				q.push(new Node(e));
+		}
+		/*for (int i = 0; i < weights.size(); i++)
+		{
+			if (weights[i]._appearCount > 0)
+				q.push(new Node(weights[i]));
+		}*/
+		//从weights中每次选取最小两个元素，构造Huffman树
+		while (q.size() > 1)
+		{
+			//左子树
+			Node* left = q.top();
+			q.pop();
+			//右子树
+			Node* right = q.top();
+			q.pop();
+
+			Node* parent = new Node(left->_weight + right->_weight);
+			parent->_left = left;
+			parent->_right = right;
+			//根节点weight入weights
+			q.push(parent);
+		}
+		//当只剩一个元素，该元素为头结点
+		_root = q.top();
+		return _root;
+	}
+	//获取根节点
+	Node* GetRoot()
+	{
+		return _root;
+	}
+private:
+	//销毁二叉树
+	void Destroy(Node* &root)
+	{
+		if (root)
+		{
+			Destroy(root->_left);
+			Destroy(root->_right);
+			delete root;
+			root = nullptr;
+		}
+	}
+private:
+	Node* _root;
+};
